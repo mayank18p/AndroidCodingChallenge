@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">AndroidCodingChallenge</string>
+    <string name="logo">Logo</string>
+    <string name="language">Language</string>
+    <string name="login_credentials">Login Credentials</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
+    <string name="shivani">Shivani</string>
+    <string name="shendkar">Shendkar</string>
+    <string name="work_email">Work email</string>
+    <string name="shivanishendkar_company_com">shivanishendkar@company.com</string>
+    <string name="company_name">Company name</string>
+    <string name="woliba">Woliba</string>
+    <string name="next">Next</string>
 </resources>
