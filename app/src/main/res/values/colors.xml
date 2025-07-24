@@ -7,4 +7,15 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="button_disable_color">#EFEFEF</color>
+    <color name="button_enable_color">#F37A65</color>
+    <color name="text_field_color">#184A61</color>
+    <color name="hint_text_color">#BDBDBD</color>
+    <color name="unverified_color">#F37A65</color>
+    <color name="verified_color">#75B084</color>
+    <color name="error_color">#DA6C74</color>
+
+    <color name="button_text_color">#989898</color>
+
 </resources>

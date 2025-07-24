@@ -8,8 +8,34 @@
     <string name="shivani">Shivani</string>
     <string name="shendkar">Shendkar</string>
     <string name="work_email">Work email</string>
-    <string name="shivanishendkar_company_com">shivanishendkar@company.com</string>
     <string name="company_name">Company name</string>
     <string name="woliba">Woliba</string>
     <string name="next">Next</string>
+    <string name="enter_work_email">Enter work email</string>
+    <string name="verify">Verify</string>
+
+    <string name="email_not_access">This email ID has not been invited by your company admin. Please contact your admin for access.</string>
+    <string name="complete_your_profile">Complete Your Profile</string>
+    <string name="password">Password</string>
+    <string name="enter_password">Enter password</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="birthday">Birthday</string>
+    <string name="mm_dd_yyyy">MM/DD/YYYY</string>
+    <string name="contact_number">Contact number</string>
+    <string name="enter_contact_number">Enter contact number</string>
+
+    <string name="terms_and_privacy_policy">I agree to Woliba\'s Terms of Service and Privacy Policy.</string>
+
+    <string name="terms_of_service_and_privacy_policy">
+        <![CDATA[
+            <font color="#092F41">I agree to Woliba&apos;s</font> <font color="#F37A65">Terms of Service</font>
+            <font color="#092F41">and</font> <font color="#F37A65">Privacy Policy.</font>
+        ]]>
+    </string>
+
+    <string name="name_chars">ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz</string>
+
+    <string name="all_fields_are_required">All fields are required.</string>
+    <string name="invalid_email_address">Invalid email address.</string>
+
 </resources>

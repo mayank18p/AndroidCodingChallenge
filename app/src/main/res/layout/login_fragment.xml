@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
@@ -15,6 +14,7 @@
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     android:padding="16dp">
 
     <!-- Woliba Logo -->
@@ -29,7 +29,7 @@
         android:layout_marginStart="8dp"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Language Flag & Dropdown -->
+    <!-- Language Flag -->
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/flagIcon"
         android:layout_width="70dp"
@@ -68,7 +68,7 @@
                 android:layout_gravity="center_horizontal"
                 android:paddingBottom="16dp"
                 android:text="@string/login_credentials"
-                android:textColor="#183B56"
+                android:textColor="@color/text_field_color"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -77,7 +77,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/first_name"
-                android:textColor="#184A61"
+                android:textColor="@color/text_field_color"
                 android:layout_marginTop="8dp"
                 android:textSize="14sp"/>
 
@@ -87,8 +87,16 @@
                 android:layout_height="48dp"
                 android:layout_marginTop="12dp"
                 android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:singleLine="true"
+                android:lines="1"
+                android:maxLines="1"
+                android:inputType="text|textCapWords"
+                android:digits="@string/name_chars"
+                android:maxLength="50"
+                android:textCursorDrawable="@drawable/black_cursor"
                 android:background="@drawable/edit_text_bg"
-                android:textColorHint="#BDBDBD"
+                android:textColorHint="@color/hint_text_color"
                 android:hint="@string/shivani" />
 
             <!-- Last Name -->
@@ -97,7 +105,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="@string/last_name"
-                android:textColor="#184A61"
+                android:textColor="@color/text_field_color"
                 android:textSize="14sp" />
 
             <androidx.appcompat.widget.AppCompatEditText
@@ -106,8 +114,16 @@
                 android:layout_height="48dp"
                 android:layout_marginTop="12dp"
                 android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:singleLine="true"
+                android:lines="1"
+                android:maxLines="1"
+                android:inputType="text|textCapWords"
+                android:digits="@string/name_chars"
+                android:maxLength="50"
+                android:textCursorDrawable="@drawable/black_cursor"
                 android:background="@drawable/edit_text_bg"
-                android:textColorHint="#BDBDBD"
+                android:textColorHint="@color/hint_text_color"
                 android:hint="@string/shendkar" />
 
             <!-- Work Email -->
@@ -116,37 +132,82 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="@string/work_email"
-                android:textColor="#184A61"
+                android:textColor="@color/text_field_color"
                 android:textSize="14sp" />
 
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/emailInput"
+            <LinearLayout
+                android:id="@+id/emailInputContainer"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginTop="12dp"
-                android:paddingStart="8dp"
-                android:textColorHint="#BDBDBD"
                 android:background="@drawable/edit_text_bg"
-                android:enabled="false"
-                android:hint="@string/shivanishendkar_company_com" />
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="8dp">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/emailInput"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp"
+                    android:singleLine="true"
+                    android:lines="1"
+                    android:inputType="textEmailAddress"
+                    android:maxLength="60"
+                    android:textCursorDrawable="@drawable/black_cursor"
+                    android:textColorHint="@color/hint_text_color"
+                    android:hint="@string/enter_work_email"
+                    android:background="@null"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/verifyText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/verify"
+                    android:visibility="gone"
+                    android:textColor="@color/unverified_color"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <!-- Email Error -->
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/emailErrorText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_marginTop="8dp"
+                android:text="@string/email_not_access"
+                android:textColor="@color/error_color"
+                android:textSize="12sp" />
 
             <!-- Company Name -->
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/companyNameText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:layout_marginTop="16dp"
                 android:text="@string/company_name"
-                android:textColor="#184A61"
+                android:textColor="@color/text_field_color"
                 android:textSize="14sp" />
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/companyNameInput"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
+                android:visibility="gone"
                 android:layout_marginTop="12dp"
                 android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:singleLine="true"
+                android:lines="1"
+                android:maxLines="1"
+                android:inputType="text|textCapWords"
+                android:maxLength="50"
+                android:textCursorDrawable="@drawable/black_cursor"
                 android:background="@drawable/edit_text_bg"
-                android:textColorHint="#BDBDBD"
+                android:textColorHint="@color/hint_text_color"
                 android:hint="@string/woliba"/>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
@@ -158,14 +219,16 @@
         android:layout_height="48dp"
         android:layout_marginHorizontal="8dp"
         android:layout_marginBottom="16dp"
-        android:backgroundTint="#EEEEEE"
-        android:enabled="false"
+        android:textStyle="bold"
+        android:clickable="false"
         android:text="@string/next"
         android:textAllCaps="false"
-        android:textColor="#989898"
+        android:background="@drawable/disable_btn_bg"
+        android:textColor="@color/button_text_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

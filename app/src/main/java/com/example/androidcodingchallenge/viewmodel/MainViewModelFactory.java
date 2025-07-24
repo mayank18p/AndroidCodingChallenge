@@ -15,8 +15,8 @@ public class MainViewModelFactory implements ViewModelProvider.Factory {
     @NonNull
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-        if (modelClass.isAssignableFrom(MainViewModel.class)) {
-            return (T) new MainViewModel(repository);
+        if (modelClass.isAssignableFrom(SharedViewModel.class)) {
+            return (T) new SharedViewModel(repository);
         }
         throw new IllegalArgumentException("Unknown ViewModel class");
     }
