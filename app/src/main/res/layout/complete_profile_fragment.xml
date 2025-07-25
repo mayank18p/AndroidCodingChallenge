@@ -7,6 +7,9 @@
 
         <import type="android.view.View"/>
 
+        <variable
+            name="viewModel"
+            type="com.example.androidcodingchallenge.viewmodel.SharedViewModel"/>
 
     </data>
 
@@ -213,12 +216,24 @@
         android:textStyle="bold"
         android:clickable="false"
         android:text="@string/next"
+        android:textSize="16sp"
         android:textAllCaps="false"
         android:background="@drawable/disable_btn_bg"
         android:textColor="@color/button_text_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="6dp"
+        android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.GONE , default=gone}"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

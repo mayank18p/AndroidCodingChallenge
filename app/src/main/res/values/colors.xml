@@ -17,5 +17,9 @@
     <color name="error_color">#DA6C74</color>
 
     <color name="button_text_color">#989898</color>
+    <color name="bg_light_theme">#BDBDBD</color>
+
+    <color name="welcome_btn_color">#FEFEFE</color>
+    <color name="layout_bg_color">#F8F8F8</color>
 
 </resources>

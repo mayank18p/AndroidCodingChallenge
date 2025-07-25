@@ -64,4 +64,7 @@ dependencies {
 
     // Glide
     implementation (libs.glide)
+
+    // OTP View
+    implementation(libs.otpview)
 }

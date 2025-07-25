@@ -1,7 +1,6 @@
 package com.example.androidcodingchallenge.ui;
 
 import static android.view.View.VISIBLE;
-
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -27,8 +26,7 @@ public class LoginFragment extends Fragment {
     public static final String TAG = "LoginFragment";
     private LoginFragmentBinding binding;
     private SharedViewModel viewModel;
-
-    private String email;
+    private boolean isEmailVerified = false;
 
     public LoginFragment() {
         super(R.layout.login_fragment);
@@ -46,13 +44,17 @@ public class LoginFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         Log.d(TAG, "onViewCreated");
 
+        setData();
+        setClickListeners();
+        setupObservers();
+    }
+
+    private void setData() {
         UserRepository repository = new UserRepository();
         MainViewModelFactory factory = new MainViewModelFactory(repository);
         viewModel = new ViewModelProvider(requireActivity(), factory).get(SharedViewModel.class);
 
-        email = String.valueOf(binding.emailInput.getText());
-
-        if (Utils.isInvalidEmail(email)) {
+        if (Utils.isInvalidEmail(String.valueOf(binding.emailInput.getText()))) {
             binding.verifyText.setVisibility(View.GONE);
         } else {
             binding.verifyText.setVisibility(VISIBLE);
@@ -76,36 +78,64 @@ public class LoginFragment extends Fragment {
                 }
             }
         });
+    }
 
+    private void setClickListeners() {
         binding.verifyText.setOnClickListener(v -> {
-//                     viewModel.verifyEmailApi(email);
-                    viewModel.sendEvent("Profile Fragment");
-                    binding.companyNameText.setVisibility(VISIBLE);
-                    binding.companyNameInput.setVisibility(VISIBLE);
-                }
-        );
-
+                    viewModel.verifyEmailApi(String.valueOf(binding.emailInput.getText()));
+                });
 
         binding.nextButton.setOnClickListener(v -> {
-            String fname = String.valueOf(binding.firstNameInput.getText());
-            String lname = String.valueOf(binding.lastNameInput.getText());
-            String email = String.valueOf(binding.emailInput.getText());
-            String company = String.valueOf(binding.companyNameInput.getText());
+            Log.d(TAG, "nextButton Click");
 
-            if (TextUtils.isEmpty(fname) || TextUtils.isEmpty(lname) || TextUtils.isEmpty(email) || TextUtils.isEmpty(company)) {
+            if (TextUtils.isEmpty(String.valueOf(binding.firstNameInput.getText())) || TextUtils.isEmpty(String.valueOf(binding.lastNameInput.getText())) || TextUtils.isEmpty(String.valueOf(binding.emailInput.getText()))) {
                 ToastUtils.showShortToast(requireActivity(), getString(R.string.all_fields_are_required));
-            } else if (Utils.isInvalidEmail(email)) {
+            } else if (Utils.isInvalidEmail(String.valueOf(binding.emailInput.getText()))) {
                 ToastUtils.showShortToast(requireActivity(), getString(R.string.invalid_email_address));
+            } else if(!isEmailVerified) {
+                ToastUtils.showShortToast(requireActivity(), getString(R.string.email_not_verified_yet));
+            } else if(TextUtils.isEmpty(String.valueOf(binding.companyNameInput.getText()))) {
+                ToastUtils.showShortToast(requireActivity(), getString(R.string.company_name_should_not_empty));
             } else {
                 // Set the user data in the ViewModel
-                viewModel.setFirstName(fname);
-                viewModel.setLastName(lname);
-                viewModel.setEmail(email);
-                viewModel.setCompany(company);
+                viewModel.setFirstName(String.valueOf(binding.firstNameInput.getText()));
+                viewModel.setLastName(String.valueOf(binding.lastNameInput.getText()));
+                viewModel.setEmail(String.valueOf(binding.emailInput.getText()));
+                viewModel.setCompany(String.valueOf(binding.companyNameInput.getText()));
+            }
+//            viewModel.sendOTPApi(email);
+        });
+    }
 
-                // viewModel.sendOTPApi(email);
+    private void setupObservers() {
+        viewModel.getEmailVerifyStatus().observe(getViewLifecycleOwner(), apiStatus -> {
+            isEmailVerified = apiStatus;
+            if (isEmailVerified && !TextUtils.isEmpty(String.valueOf(binding.firstNameInput.getText())) && !TextUtils.isEmpty(String.valueOf(binding.lastNameInput.getText())) && !TextUtils.isEmpty(String.valueOf(binding.emailInput.getText())) && !TextUtils.isEmpty(String.valueOf(binding.companyNameInput.getText()))) {
+                binding.nextButton.setEnabled(true);
+                binding.nextButton.setClickable(true);
+                binding.nextButton.setBackground(ContextCompat.getDrawable(requireActivity(), R.drawable.enable_btn_bg));
+                binding.verifyText.setTextColor(getResources().getColor(R.color.verified_color));
 
-                viewModel.sendEvent("Otp Fragment");
+                binding.companyNameText.setVisibility(VISIBLE);
+                binding.companyNameInput.setVisibility(VISIBLE);
+            } else {
+                binding.nextButton.setEnabled(false);
+                binding.nextButton.setClickable(false);
+                binding.nextButton.setBackground(ContextCompat.getDrawable(requireActivity(), R.drawable.disable_btn_bg));
+                binding.verifyText.setTextColor(getResources().getColor(R.color.unverified_color));
+            }
+        });
+
+        viewModel.getSendOtpStatus().observe(getViewLifecycleOwner(), apiStatus -> {
+            if (apiStatus) {
+                // Navigate to the OTP Fragment
+                viewModel.sendEvent("Profile Fragment");
+            }
+        });
+
+        viewModel.getMessage().observe(getViewLifecycleOwner(), message -> {
+            if (!TextUtils.isEmpty(message)) {
+                ToastUtils.showShortToast(requireActivity(), message);
             }
         });
     }

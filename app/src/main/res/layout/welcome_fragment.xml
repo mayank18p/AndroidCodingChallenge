@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View"/>
+
+    </data>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/rootLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/layout_bg_color"
+    android:padding="24dp">
+
+
+    <!-- Running Icon -->
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivRunner"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:src="@drawable/running"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <!-- Loading Message -->
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvLoadingMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/getting_your_wellness_journey_ready"
+        android:textSize="16sp"
+        android:textColor="@color/text_field_color"
+        android:textAlignment="center"
+        app:layout_constraintTop_toBottomOf="@id/ivRunner"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+    <!-- Welcome Image -->
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivWelcome"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="24dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/welcome_banner"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/tvWelcomeTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.45"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Title Text -->
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvWelcomeTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/welcome_to_woliba"
+        android:visibility="gone"
+        android:textAlignment="center"
+        android:textColor="@color/text_field_color"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivWelcome" />
+
+    <!-- Description -->
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvDescription"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="24dp"
+        android:lineSpacingExtra="4dp"
+        android:text="@string/welcome_message"
+        android:visibility="gone"
+        android:textAlignment="center"
+        android:textColor="@color/text_field_color"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvWelcomeTitle" />
+
+    <!-- Get Started Button -->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnGetStarted"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="24dp"
+        android:clickable="false"
+        android:textAllCaps="false"
+        android:background="@drawable/enable_btn_bg"
+        android:text="@string/let_s_get_started"
+        android:textColor="@color/welcome_btn_color"
+        android:textSize="16sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -25,29 +25,37 @@ public class MainActivity extends AppCompatActivity {
         binding = MainActivityBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        UserRepository repository = new UserRepository();
-        MainViewModelFactory factory = new MainViewModelFactory(repository);
-        viewModel = new ViewModelProvider(this, factory).get(SharedViewModel.class);
-
         if (savedInstanceState == null) {
             fragmentHelper = new FragmentHelper(getSupportFragmentManager(), R.id.fragment_container);
             fragmentHelper.addFragment(new LoginFragment());
         }
 
+        setData();
         setupObservers();
+    }
+
+    private void setData() {
+        UserRepository repository = new UserRepository();
+        MainViewModelFactory factory = new MainViewModelFactory(repository);
+        viewModel = new ViewModelProvider(this, factory).get(SharedViewModel.class);
     }
 
     private void setupObservers() {
         viewModel.getEventData().observe(this, message -> {
             // Handle event
-            if (message.equals("Profile Fragment")) {
-                Log.d(TAG, "Navigating to Profile Fragment");
-//                fragmentHelper.replaceFragment(new ProfileFragment());
-            } else if (message.equals("Otp Fragment")) {
-                Log.d(TAG, "Navigating to Otp Fragment");
-//                fragmentHelper.replaceFragment(new SettingsFragment());
-            } else {
-                Log.w(TAG, "Unknown event: " + message);
+            switch (message) {
+                case "Otp Fragment":
+                    fragmentHelper.replaceFragment(new OtpFragment(), true);
+                    break;
+                case "Profile Fragment":
+                    fragmentHelper.replaceFragment(new CompleteProfileFragment(), true);
+                    break;
+                case "Welcome Fragment":
+                    fragmentHelper.replaceFragment(new WelcomeFragment(), true);
+                    break;
+                default:
+                    Log.d(TAG, "Unhandled event: " + message);
+                    break;
             }
         });
     }

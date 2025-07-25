@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View"/>
+
+        <variable
+            name="viewModel"
+            type="com.example.androidcodingchallenge.viewmodel.SharedViewModel"/>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background"
+        android:padding="16dp">
+
+        <!-- Woliba Logo -->
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/logoIcon"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:contentDescription="@string/logo"
+            android:src="@drawable/ic_logo"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Language Flag & Dropdown -->
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/flagIcon"
+            android:layout_width="70dp"
+            android:layout_height="40dp"
+            android:contentDescription="@string/language"
+            android:src="@drawable/ic_us_flag"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Login Card Container -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/loginCard"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="32dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/logoIcon">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <!-- Header -->
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/profileHeader"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:paddingBottom="16dp"
+                    android:text="@string/input_verification_code"
+                    android:textColor="@color/text_field_color"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <!-- Password -->
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_horizontal"
+                    android:text="@string/we_ve_sent_a_6_digit_otp"
+                    android:textColor="@color/button_text_color"
+                    android:layout_marginTop="8dp"
+                    android:textSize="14sp"/>
+
+                <in.aabhasjindal.otptextview.OtpTextView
+                    android:id="@+id/otp_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:digits="1234567890"
+                    android:inputType="number"
+                    android:maxLength="6"
+                    android:textColor="@android:color/black"
+                    app:otp_text_size="20sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/sub_title"
+                    app:otp_box_background="@drawable/otp_grey_box"
+                    app:otp_box_background_active="@drawable/otp_red_box"
+                    app:otp_box_background_inactive="@drawable/otp_grey_box"
+                    app:height="50dp"
+                    app:hide_otp="false"
+                    app:length="6"
+                    app:otp=""/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/incorrectOTPText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_horizontal"
+                    android:text="@string/incorrect_otp"
+                    android:textColor="@color/error_color"
+                    android:textSize="12sp"
+                    android:layout_marginTop="4dp"
+                    android:visibility="gone"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/resendText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_horizontal"
+                    android:text="@string/resend_otp_in_03_00"
+                    android:textColor="@color/text_field_color"
+                    android:textSize="14sp"
+                    android:layout_marginTop="16dp"/>
+
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Next Button -->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/submitButton"
+            android:layout_width="377dp"
+            android:layout_height="45dp"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/disable_btn_bg"
+            android:clickable="false"
+            android:text="@string/submit"
+            android:textAllCaps="false"
+            android:textColor="@color/button_text_color"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="6dp"
+            android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.GONE , default=gone}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
