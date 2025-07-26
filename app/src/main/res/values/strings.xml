@@ -50,5 +50,15 @@
     <string name="welcome_to_woliba">Welcome to Woliba!</string>
     <string name="let_s_get_started">Let’s Get Started</string>
     <string name="getting_your_wellness_journey_ready">Getting your wellness journey ready...</string>
+    <string name="thank_you">Thank You!</string>
+
+    <string name="resend_otp_in_">Resend OTP in %02d : %02d</string>
+    <string name="resend">Resend</string>
+
+    <string name="passwords_dont_match_please_reenter">Passwords do not match. Please re-enter.</string>
+    <string name="passwords_must_be_eight_char_log">Password must be at least 8 characters long.</string>
+    <string name="please_accept_terms_and_privacy_policy">Please accept Terms of Service and Privacy Policy.</string>
+    <string name="invalid_date_format">Invalid date format.</string>
+    <string name="contact_must_be_ten_digits_long">Contact number must be exactly 10 digits.</string>
 
 </resources>

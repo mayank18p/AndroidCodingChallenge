@@ -3,20 +3,14 @@ package com.example.androidcodingchallenge.data;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
-
-public class VerifyOtpRequest {
+public class VerifyOtpErrorResponse {
     @SerializedName("status")
     @Expose
     private String status;
 
     @SerializedName("data")
     @Expose
-    private Data failureData;
-
-    @SerializedName("data")
-    @Expose
-    private List<String> data;
+    private Data data;
 
     public String getStatus() {
         return status;
@@ -26,11 +20,11 @@ public class VerifyOtpRequest {
         this.status = status;
     }
 
-    public List<String> getData() {
+    public Data getData() {
         return data;
     }
 
-    public void setData(List<String> data) {
+    public void setData(Data data) {
         this.data = data;
     }
 

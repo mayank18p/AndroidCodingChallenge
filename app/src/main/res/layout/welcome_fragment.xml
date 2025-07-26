@@ -20,8 +20,8 @@
     <!-- Running Icon -->
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/ivRunner"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
         android:src="@drawable/running"
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -37,6 +37,7 @@
         android:layout_height="wrap_content"
         android:text="@string/getting_your_wellness_journey_ready"
         android:textSize="16sp"
+        android:textStyle="bold"
         android:textColor="@color/text_field_color"
         android:textAlignment="center"
         app:layout_constraintTop_toBottomOf="@id/ivRunner"

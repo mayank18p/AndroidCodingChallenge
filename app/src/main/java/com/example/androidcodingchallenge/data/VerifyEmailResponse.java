@@ -11,10 +11,6 @@ public class VerifyEmailResponse {
     @Expose
     private Data data;
 
-    @SerializedName("error")
-    @Expose
-    private String error;
-
     public String getStatus() {
         return status;
     }
@@ -29,14 +25,6 @@ public class VerifyEmailResponse {
 
     public void setData(Data data) {
         this.data = data;
-    }
-
-    public String getError() {
-        return error;
-    }
-
-    public void setError(String error) {
-        this.error = error;
     }
 
     public static class Data {
@@ -58,6 +46,10 @@ public class VerifyEmailResponse {
         @SerializedName("user_type")
         @Expose
         private Integer userType;
+
+        @SerializedName("message")
+        @Expose
+        private String message;
 
         public boolean getIsVerified() {
             return isVerified;
@@ -105,6 +97,14 @@ public class VerifyEmailResponse {
 
         public void setUserType(Integer userType) {
             this.userType = userType;
+        }
+
+        public String getMessage() {
+            return message;
+        }
+
+        public void setMessage(String message) {
+            this.message = message;
         }
     }
 }

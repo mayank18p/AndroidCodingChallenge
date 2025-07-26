@@ -45,13 +45,13 @@ public class MainActivity extends AppCompatActivity {
             // Handle event
             switch (message) {
                 case "Otp Fragment":
-                    fragmentHelper.replaceFragment(new OtpFragment(), true);
+                    fragmentHelper.replaceFragment(new OtpFragment(), false);
                     break;
                 case "Profile Fragment":
-                    fragmentHelper.replaceFragment(new CompleteProfileFragment(), true);
+                    fragmentHelper.replaceFragment(new CompleteProfileFragment(), false);
                     break;
                 case "Welcome Fragment":
-                    fragmentHelper.replaceFragment(new WelcomeFragment(), true);
+                    fragmentHelper.replaceFragment(new WelcomeFragment(), false);
                     break;
                 default:
                     Log.d(TAG, "Unhandled event: " + message);

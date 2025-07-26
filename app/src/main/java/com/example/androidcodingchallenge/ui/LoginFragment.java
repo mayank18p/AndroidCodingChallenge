@@ -1,6 +1,7 @@
 package com.example.androidcodingchallenge.ui;
 
 import static android.view.View.VISIBLE;
+import static com.example.androidcodingchallenge.utils.Utils.hideKeyboardFromFragment;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -54,12 +55,6 @@ public class LoginFragment extends Fragment {
         MainViewModelFactory factory = new MainViewModelFactory(repository);
         viewModel = new ViewModelProvider(requireActivity(), factory).get(SharedViewModel.class);
 
-        if (Utils.isInvalidEmail(String.valueOf(binding.emailInput.getText()))) {
-            binding.verifyText.setVisibility(View.GONE);
-        } else {
-            binding.verifyText.setVisibility(VISIBLE);
-        }
-
         binding.emailInput.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -72,7 +67,7 @@ public class LoginFragment extends Fragment {
             @Override
             public void afterTextChanged(Editable editable) {
                 if (TextUtils.isEmpty(editable) || Utils.isInvalidEmail(editable.toString())) {
-                    binding.verifyText.setVisibility(View.GONE);
+                    binding.verifyText.setVisibility(View.INVISIBLE);
                 } else {
                     binding.verifyText.setVisibility(VISIBLE);
                 }
@@ -82,28 +77,35 @@ public class LoginFragment extends Fragment {
 
     private void setClickListeners() {
         binding.verifyText.setOnClickListener(v -> {
-                    viewModel.verifyEmailApi(String.valueOf(binding.emailInput.getText()));
-                });
+            hideKeyboardFromFragment(requireActivity(), binding.verifyText);
+
+            // Call Verify Email API here
+            viewModel.verifyEmailApi(String.valueOf(binding.emailInput.getText()));
+        });
 
         binding.nextButton.setOnClickListener(v -> {
-            Log.d(TAG, "nextButton Click");
 
             if (TextUtils.isEmpty(String.valueOf(binding.firstNameInput.getText())) || TextUtils.isEmpty(String.valueOf(binding.lastNameInput.getText())) || TextUtils.isEmpty(String.valueOf(binding.emailInput.getText()))) {
                 ToastUtils.showShortToast(requireActivity(), getString(R.string.all_fields_are_required));
+
             } else if (Utils.isInvalidEmail(String.valueOf(binding.emailInput.getText()))) {
                 ToastUtils.showShortToast(requireActivity(), getString(R.string.invalid_email_address));
+
             } else if(!isEmailVerified) {
                 ToastUtils.showShortToast(requireActivity(), getString(R.string.email_not_verified_yet));
+
             } else if(TextUtils.isEmpty(String.valueOf(binding.companyNameInput.getText()))) {
                 ToastUtils.showShortToast(requireActivity(), getString(R.string.company_name_should_not_empty));
+
             } else {
-                // Set the user data in the ViewModel
                 viewModel.setFirstName(String.valueOf(binding.firstNameInput.getText()));
                 viewModel.setLastName(String.valueOf(binding.lastNameInput.getText()));
                 viewModel.setEmail(String.valueOf(binding.emailInput.getText()));
                 viewModel.setCompany(String.valueOf(binding.companyNameInput.getText()));
+
+                // Call send OTP API here
+                viewModel.sendOTPApi(String.valueOf(binding.emailInput.getText()));
             }
-//            viewModel.sendOTPApi(email);
         });
     }
 
@@ -114,6 +116,8 @@ public class LoginFragment extends Fragment {
                 binding.nextButton.setEnabled(true);
                 binding.nextButton.setClickable(true);
                 binding.nextButton.setBackground(ContextCompat.getDrawable(requireActivity(), R.drawable.enable_btn_bg));
+
+                binding.verifyText.setVisibility(VISIBLE);
                 binding.verifyText.setTextColor(getResources().getColor(R.color.verified_color));
 
                 binding.companyNameText.setVisibility(VISIBLE);
@@ -129,12 +133,13 @@ public class LoginFragment extends Fragment {
         viewModel.getSendOtpStatus().observe(getViewLifecycleOwner(), apiStatus -> {
             if (apiStatus) {
                 // Navigate to the OTP Fragment
-                viewModel.sendEvent("Profile Fragment");
+                viewModel.sendEvent("Otp Fragment");
             }
         });
 
         viewModel.getMessage().observe(getViewLifecycleOwner(), message -> {
             if (!TextUtils.isEmpty(message)) {
+                binding.emailErrorText.setText(message);
                 ToastUtils.showShortToast(requireActivity(), message);
             }
         });
